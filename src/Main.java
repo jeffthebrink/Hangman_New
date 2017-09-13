@@ -6,6 +6,8 @@ public class Main {
 
     static List<String> wordList = new ArrayList<>();
     private static Random random = new Random();
+    static Integer guessCount = 0;
+    static Integer correctGuess = 0;
 
     public static String readAndReturnWord() {
         File file = new File("words.txt");
@@ -42,6 +44,18 @@ public class Main {
         System.out.println();
     }
 
+    public static String makeAGuess() {
+        Scanner scannerChar = new Scanner(System.in);
+        System.out.println("Enter a letter.");
+        String guessChar = scannerChar.next();
+
+        if (guessChar.length() > 1) {
+            System.out.println("You may only enter one letter at a time!");
+        }
+
+        return guessChar;
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello and welcome to the hangman game!");
         System.out.println();
@@ -54,8 +68,27 @@ public class Main {
         displayGallows(mysteryWord);
 
         System.out.println();
-        System.out.println("Enter a letter for your first guess.");
 
+        while (true) {
+
+            String guessWord = makeAGuess();
+
+            if (mysteryWord.contains(guessWord)) {
+                System.out.println("That letter is in the mystery word!");
+                correctGuess++;
+                if (correctGuess == mysteryWord.length()){
+                    System.out.println("Congrats! You've won the game!");
+                    System.exit(1);
+                }
+            } else {
+                System.out.println("Sorry, that letter is not in the mystery word.");
+                guessCount++;
+                if (guessCount > (mysteryWord.length() + 2)) {
+                    System.out.println("You've run out of guesses! Game over!");
+                    System.exit(1);
+                }
+            }
+        }
 
     }
 }
