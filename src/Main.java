@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Main {
 
-    static List<String> wordList = new ArrayList<>();
+    private static List<String> wordList = new ArrayList<>();
     private static Random random = new Random();
-    static Integer guessCount = 0;
-    static Integer correctGuess = 0;
+    private static Integer guessCount = 0;
+    private static Integer correctGuess = 0;
     private static ArrayList<String> guessArray = new ArrayList<>();
 
 
@@ -30,8 +30,7 @@ public class Main {
         scanner.close();
 
         int index = random.nextInt(wordList.size());
-        String randomWord = wordList.get(index);
-        return randomWord;
+        return wordList.get(index);
     }
 
     private static void displayGallows(String mysteryWord) {
