@@ -8,6 +8,8 @@ public class Main {
     private static Random random = new Random();
     static Integer guessCount = 0;
     static Integer correctGuess = 0;
+    public static ArrayList<String> guessArray = new ArrayList<>();
+
 
     public static String readAndReturnWord() {
         File file = new File("words.txt");
@@ -56,6 +58,10 @@ public class Main {
         return guessChar;
     }
 
+    public static void updateDisplay() {
+        System.out.println("updated display goes here...");
+        System.out.println();
+    }
     public static void main(String[] args) {
         System.out.println("Hello and welcome to the hangman game!");
         System.out.println();
@@ -63,7 +69,6 @@ public class Main {
         String mysteryWord = readAndReturnWord();
 
         System.out.println();
-        System.out.println("The mystery word has " + mysteryWord.length() + " letters in it.");
 
         displayGallows(mysteryWord);
 
@@ -71,17 +76,22 @@ public class Main {
 
         while (true) {
 
-            String guessWord = makeAGuess();
+            String guessLetter = makeAGuess();
 
-            if (mysteryWord.contains(guessWord)) {
+            if (mysteryWord.contains(guessLetter) && !guessArray.contains(guessLetter)) {
                 System.out.println("That letter is in the mystery word!");
+                guessArray.add(guessLetter);
+                System.out.println(guessArray);
                 correctGuess++;
+                updateDisplay();
                 if (correctGuess == mysteryWord.length()){
                     System.out.println("Congrats! You've won the game!");
                     System.exit(1);
                 }
             } else {
-                System.out.println("Sorry, that letter is not in the mystery word.");
+                System.out.println("Sorry, that letter is not in the mystery word or has already been guessed.");
+                guessArray.add(guessLetter);
+                System.out.println(guessArray);
                 guessCount++;
                 if (guessCount > (mysteryWord.length() + 2)) {
                     System.out.println("You've run out of guesses! Game over!");
