@@ -34,11 +34,9 @@ public class Main {
     }
 
     private static void display(String mysteryWord) {
-        int wordLength = mysteryWord.length();
-
         int counter = 0;
 
-        while (counter < wordLength) {
+        while (counter < mysteryWord.length()) {
             System.out.print("_ ");
             counter++;
         }
@@ -57,10 +55,18 @@ public class Main {
         return guessChar;
     }
 
-    private static void updateDisplay() {
+    private static void updateDisplay(String mysteryWord, String guessLetter) {
+        char[] filler = new char[mysteryWord.length()];
+        int i = 0;
+        while (i < mysteryWord.length()) {
+            filler[i] = '_';
+            if (mysteryWord.charAt(i) == ' ') {
+                filler[i] = ' ';
+            }
+            i++;
+        }
+        System.out.println(filler);
 
-        System.out.println("updated display goes here...");
-        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -83,7 +89,7 @@ public class Main {
                 System.out.println("That letter is in the mystery word!");
                 guessArray.add(guessLetter);
                 correctGuess++;
-                updateDisplay();
+                updateDisplay(mysteryWord, guessLetter);
                 if (correctGuess == mysteryWord.length()) {
                     System.out.println("Congrats! You've won the game!");
                     System.exit(1);
