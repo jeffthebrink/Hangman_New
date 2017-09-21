@@ -33,7 +33,7 @@ public class Main {
         return wordList.get(index);
     }
 
-    private static void displayGallows(String mysteryWord) {
+    private static void display(String mysteryWord) {
         int wordLength = mysteryWord.length();
 
         int counter = 0;
@@ -58,6 +58,7 @@ public class Main {
     }
 
     private static void updateDisplay() {
+
         System.out.println("updated display goes here...");
         System.out.println();
     }
@@ -70,7 +71,7 @@ public class Main {
 
         System.out.println();
 
-        displayGallows(mysteryWord);
+        display(mysteryWord);
 
         System.out.println();
 
